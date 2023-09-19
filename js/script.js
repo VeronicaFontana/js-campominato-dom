@@ -22,6 +22,7 @@ btnRestart.addEventListener("click", function(){
   select.value = 0;
   bombs = [];
   endgameResult.classList.add("d-none");
+  counter = 0;
 })
 
 btnStart.addEventListener("click", function(){
