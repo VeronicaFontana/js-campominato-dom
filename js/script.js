@@ -2,7 +2,8 @@ const container = document.querySelector(".container");
 const btnStart = document.querySelector(".btn-start");
 const btnRestart = document.querySelector(".btn-restart");
 const select = document.querySelector(".form-select");
-
+let randomicNumber; 
+let numeroTrovato = false;
 const bombs = [];
 
 
@@ -39,24 +40,40 @@ btnStart.addEventListener("click", function(){
 
 
 
+
+for(c = 1; c <= 16; c++){
+  randomicNumber = randomizer(1, 100);
+  bombs.push(randomicNumber);
+}
+console.log(bombs)
+
 // FUNCTIONS //
 function easy(){
   for(i = 1; i <= 100; i++){
     const square = createBox(i);
     square.classList.add("box-100");
-    
-    square.addEventListener("click", function(){
-      this.classList.toggle("box-click");
-    })
     container.append(square);
+
+    square.addEventListener("click", function(){
+      for(let i = 0; i < bombs.length; i++){
+        if(bombs[i] == square.innerHTML){
+          numeroTrovato = true;
+        }
+      }
+
+      if(numeroTrovato){
+        console.log("bomba");
+        numeroTrovato = false;
+      }else{
+        console.log("non bomba");
+      }
+    })
+    
   }
 
-  for(c = 1; c <= 16; c++){
-    const randomicNumber = randomizer(1, 100);
-    bombs.push(randomicNumber);
-  }
   
-  console.log(bombs)
+  
+  
 }
 
 function medium(){
