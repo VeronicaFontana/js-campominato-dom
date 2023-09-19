@@ -46,11 +46,12 @@ btnStart.addEventListener("click", function(){
 
 // FUNCTIONS //
 function easy(){
-  for(c = 1; c <= 16; c++){
+  do{
     randomicNumber = randomizer(1, 100);
     doppio();
-    bombs.push(randomicNumber);
-  }
+  }while(bombs.length < 16);
+
+
   console.log(bombs)
 
   for(i = 1; i <= 100; i++){
@@ -146,13 +147,13 @@ function doppio(){
     }
   }
   
-
   if(numeroDoppio){
     console.log("numero doppio")
     blackList.push(randomicNumber);
     numeroDoppio = false;
   }else{
     console.log("no numero doppio")
+    bombs.push(randomicNumber);
   }
 
   console.log(blackList);
