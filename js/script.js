@@ -3,6 +3,15 @@ const btnStart = document.querySelector(".btn-start");
 const btnRestart = document.querySelector(".btn-restart");
 const select = document.querySelector(".form-select");
 
+const bombs = [];
+
+
+
+
+
+
+
+//BUTTONS//
 btnRestart.addEventListener("click", function(){
   btnStart.classList.remove("d-none");
   container.classList.add("d-none");
@@ -28,25 +37,34 @@ btnStart.addEventListener("click", function(){
   }
 })
 
+
+
+// FUNCTIONS //
 function easy(){
   for(i = 1; i <= 100; i++){
-  const square = createBox(i);
-  square.classList.add("box-100");
-		
-  square.addEventListener("click", function(){
-    this.classList.toggle("box-click");
-  })
-
-  container.append(square);
+    const square = createBox(i);
+    square.classList.add("box-100");
+    
+    square.addEventListener("click", function(){
+      this.classList.toggle("box-click");
+    })
+    container.append(square);
   }
+
+  for(c = 1; c <= 16; c++){
+    const randomicNumber = randomizer(1, 100);
+    bombs.push(randomicNumber);
+  }
+  
+  console.log(bombs)
 }
 
 function medium(){
   for(i = 1; i <= 81; i++){
-  const square = createBox(i);
-  square.classList.add("box-81");
+    const square = createBox(i);
+    square.classList.add("box-81");
 		
-  square.addEventListener("click", function(){
+    square.addEventListener("click", function(){
     this.classList.toggle("box-click");
   })
 
@@ -73,4 +91,11 @@ function createBox(index){
 	newBox.className = "box";
 	newBox.innerHTML = index;
 	return newBox;
+}
+
+function randomizer(min, max){
+  const random = Math.floor(Math.random() * (max - min + 1) + min);
+  
+
+  return random;
 }
