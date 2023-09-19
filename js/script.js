@@ -2,13 +2,15 @@ const container = document.querySelector(".container");
 const btnStart = document.querySelector(".btn-start");
 const btnRestart = document.querySelector(".btn-restart");
 const select = document.querySelector(".form-select");
+const endgameResult =  document.getElementById("endgame");
+endgameResult.classList.add("d-none");
+
 let randomicNumber; 
 let numeroTrovato = false;
-const bombs = [];
-
-
-
-
+let numeroDoppio = false;
+let bombs = [];
+let blackList = [];
+let counter = 0;
 
 
 
@@ -18,6 +20,8 @@ btnRestart.addEventListener("click", function(){
   container.classList.add("d-none");
   container.innerHTML = " ";
   select.value = 0;
+  bombs = [];
+  endgameResult.classList.add("d-none");
 })
 
 btnStart.addEventListener("click", function(){
@@ -39,12 +43,11 @@ btnStart.addEventListener("click", function(){
 })
 
 
-
-
 // FUNCTIONS //
 function easy(){
   for(c = 1; c <= 16; c++){
     randomicNumber = randomizer(1, 100);
+    doppio();
     bombs.push(randomicNumber);
   }
   console.log(bombs)
@@ -53,7 +56,12 @@ function easy(){
     const square = createBox(i);
     square.classList.add("box-100");
     container.append(square);
+    const inclusion = bombs.includes(i);
 
+    if(inclusion){
+      square.classList.add("box-bomb");
+    }
+    
     square.addEventListener("click", function(){
       bombFinder(square);
     })
@@ -68,7 +76,7 @@ function medium(){
   console.log(bombs);
 
   for(i = 1; i <= 81; i++){
-    const square = createBox(i);
+    square = createBox(i);
     square.classList.add("box-81");
 		container.append(square);
     
@@ -86,7 +94,7 @@ function hard(){
   console.log(bombs);
 
   for(i = 1; i <= 49; i++){
-    const square = createBox(i);
+    square = createBox(i);
     square.classList.add("box-49");
 		container.append(square);
 
@@ -118,8 +126,33 @@ function bombFinder(variable){
 
   if(numeroTrovato){
     console.log("bomba");
+    endgameResult.classList.remove("d-none");
+    endgameResult.innerHTML = `Hai fatto ${counter} punti!`
     numeroTrovato = false;
   }else{
     console.log("non bomba");
+    variable.classList.add("no-box-bomb");
+    counter++;
   }
+}
+
+function doppio(){
+  for(let i = 0; i < bombs.length; i++){
+    if(bombs.includes(randomicNumber)){
+      numeroDoppio = true;
+    }else{
+      numeroDoppio = false;
+    }
+  }
+  
+
+  if(numeroDoppio){
+    console.log("numero doppio")
+    blackList.push(randomicNumber);
+    numeroDoppio = false;
+  }else{
+    console.log("no numero doppio")
+  }
+
+  console.log(blackList);
 }

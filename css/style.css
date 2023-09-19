@@ -43,7 +43,7 @@
 
 .box{
   background-color: rgb(10, 157, 255);
-  color: rgb(10, 157, 255);
+  color: rgba(255, 255, 255, 0);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -63,11 +63,11 @@
   width: calc(100% / 7);
 }
 
-.box-click{
-  background-color: rgb(255, 186, 10);
-  color: white;
-}
 
 .box-bomb{
   background-color: red;
+}
+
+.no-box-bomb{
+  background-color: rgb(175, 175, 175);
 }
