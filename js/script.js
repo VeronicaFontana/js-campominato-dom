@@ -41,64 +41,58 @@ btnStart.addEventListener("click", function(){
 
 
 
-for(c = 1; c <= 16; c++){
-  randomicNumber = randomizer(1, 100);
-  bombs.push(randomicNumber);
-}
-console.log(bombs)
-
 // FUNCTIONS //
 function easy(){
+  for(c = 1; c <= 16; c++){
+    randomicNumber = randomizer(1, 100);
+    bombs.push(randomicNumber);
+  }
+  console.log(bombs)
+
   for(i = 1; i <= 100; i++){
     const square = createBox(i);
     square.classList.add("box-100");
     container.append(square);
 
     square.addEventListener("click", function(){
-      for(let i = 0; i < bombs.length; i++){
-        if(bombs[i] == square.innerHTML){
-          numeroTrovato = true;
-        }
-      }
-
-      if(numeroTrovato){
-        console.log("bomba");
-        numeroTrovato = false;
-      }else{
-        console.log("non bomba");
-      }
+      bombFinder(square);
     })
-    
   }
-
-  
-  
-  
 }
 
 function medium(){
+  for(c = 1; c <= 16; c++){
+    randomicNumber = randomizer(1, 81);
+    bombs.push(randomicNumber);
+  }
+  console.log(bombs);
+
   for(i = 1; i <= 81; i++){
     const square = createBox(i);
     square.classList.add("box-81");
-		
+		container.append(square);
+    
     square.addEventListener("click", function(){
-    this.classList.toggle("box-click");
-  })
-
-  container.append(square);
+      bombFinder(square);
+    })
   }
 }
 
 function hard(){
+  for(c = 1; c <= 16; c++){
+    randomicNumber = randomizer(1, 49);
+    bombs.push(randomicNumber);
+  }
+  console.log(bombs);
+
   for(i = 1; i <= 49; i++){
-  const square = createBox(i);
-  square.classList.add("box-49");
-		
-  square.addEventListener("click", function(){
-    this.classList.toggle("box-click");
-  })
-  
-  container.append(square);
+    const square = createBox(i);
+    square.classList.add("box-49");
+		container.append(square);
+
+    square.addEventListener("click", function(){
+      bombFinder(square);
+    })
   }
 }
 
@@ -112,7 +106,20 @@ function createBox(index){
 
 function randomizer(min, max){
   const random = Math.floor(Math.random() * (max - min + 1) + min);
-  
-
   return random;
+}
+
+function bombFinder(variable){
+  for(let i = 0; i < bombs.length; i++){
+    if(bombs[i] == variable.innerHTML){
+      numeroTrovato = true;
+    }
+  }
+
+  if(numeroTrovato){
+    console.log("bomba");
+    numeroTrovato = false;
+  }else{
+    console.log("non bomba");
+  }
 }
