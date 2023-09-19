@@ -3,6 +3,10 @@ const btnStart = document.querySelector(".btn-start");
 const btnRestart = document.querySelector(".btn-restart");
 const select = document.querySelector(".form-select");
 const endgameResult =  document.getElementById("endgame");
+const mLayer = document.querySelector(".m-layer");
+const tLayer = document.querySelector(".t-layer");
+
+
 endgameResult.classList.add("d-none");
 
 let randomicNumber; 
@@ -22,6 +26,7 @@ btnRestart.addEventListener("click", function(){
   select.value = 0;
   bombs = [];
   endgameResult.classList.add("d-none");
+  tLayer.classList.add("d-none");
   counter = 0;
 })
 
@@ -51,12 +56,13 @@ function easy(){
     doppio();
   }while(bombs.length < 16);
 
-
   console.log(bombs)
 
   for(i = 1; i <= 100; i++){
     const square = createBox(i);
     square.classList.add("box-100");
+    
+    mLayer.append(square);
     container.append(square);
     const inclusion = bombs.includes(i);
 
@@ -130,6 +136,7 @@ function bombFinder(variable){
     console.log("bomba");
     endgameResult.classList.remove("d-none");
     endgameResult.innerHTML = `Hai fatto ${counter} punti!`
+    tLayer.classList.remove("d-none");
     numeroTrovato = false;
   }else{
     console.log("non bomba");

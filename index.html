@@ -26,11 +26,13 @@
     </div>
   </section>
 
-  <section class="main d-flex flex-column ">
+  <section class="main position-relative">
     <button class="btn-start">Seleziona la difficoltà e poi iniziamo!</button>
-    <div class="container d-none">
+    <div class="container position-absolute d-none">
     </div>
-    <span id="endgame" class="text-dark fs-2 mt-5"></span>
+    <div class="m-layer position-absolute d-none"></div>
+    <div class="t-layer position-absolute z-3 d-none"></div>
+    <span id="endgame" class="text-dark fs-2 position-absolute bottom-0 "></span>
   </section>
 
   <script src="js/script.js"></script>

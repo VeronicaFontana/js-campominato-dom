@@ -71,3 +71,13 @@
 .no-box-bomb{
   background-color: rgb(175, 175, 175);
 }
+
+.m-layer{
+  background-color: blueviolet;
+}
+
+.t-layer{
+  width: 600px;
+  height: 600px;
+  background-color: rgba(0, 0, 0, 0.235);
+}
