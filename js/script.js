@@ -23,6 +23,7 @@ btnRestart.addEventListener("click", function(){
   btnStart.classList.remove("d-none");
   container.classList.add("d-none");
   container.innerHTML = " ";
+  mLayer.innerHTML = " ";
   select.value = 0;
   bombs = [];
   endgameResult.classList.add("d-none");
@@ -32,7 +33,9 @@ btnRestart.addEventListener("click", function(){
 
 btnStart.addEventListener("click", function(){
   btnStart.classList.add("d-none");
+  mLayer.classList.remove("d-none");
   container.classList.remove("d-none");
+
 
   if(select.value == 1){
     console.log("facile");
@@ -60,55 +63,89 @@ function easy(){
 
   for(i = 1; i <= 100; i++){
     const square = createBox(i);
+    const mSquare = createBox(i);
     square.classList.add("box-100");
+    mSquare.classList.add("box-100");
     
-    mLayer.append(square);
+    mLayer.append(mSquare);
     container.append(square);
     const inclusion = bombs.includes(i);
 
     if(inclusion){
       square.classList.add("box-bomb");
     }
+
+    function listenAdd(){
+      mSquare.addEventListener("click", function(){
+        bombFinder(mSquare);
+      })
+    }
     
-    square.addEventListener("click", function(){
-      bombFinder(square);
-    })
+    mSquare.removeEventListener("click", listenAdd())
   }
 }
 
 function medium(){
-  for(c = 1; c <= 16; c++){
+  do{
     randomicNumber = randomizer(1, 81);
-    bombs.push(randomicNumber);
-  }
-  console.log(bombs);
+    doppio();
+  }while(bombs.length < 16);
+
+  console.log(bombs)
 
   for(i = 1; i <= 81; i++){
-    square = createBox(i);
+    const square = createBox(i);
+    const mSquare = createBox(i);
     square.classList.add("box-81");
-		container.append(square);
+    mSquare.classList.add("box-81");
     
-    square.addEventListener("click", function(){
-      bombFinder(square);
-    })
+    mLayer.append(mSquare);
+    container.append(square);
+    const inclusion = bombs.includes(i);
+
+    if(inclusion){
+      square.classList.add("box-bomb");
+    }
+
+    function listenAdd(){
+      mSquare.addEventListener("click", function(){
+        bombFinder(mSquare);
+      })
+    }
+    
+    mSquare.removeEventListener("click", listenAdd())
   }
 }
 
 function hard(){
-  for(c = 1; c <= 16; c++){
+  do{
     randomicNumber = randomizer(1, 49);
-    bombs.push(randomicNumber);
-  }
-  console.log(bombs);
+    doppio();
+  }while(bombs.length < 16);
+
+  console.log(bombs)
 
   for(i = 1; i <= 49; i++){
-    square = createBox(i);
+    const square = createBox(i);
+    const mSquare = createBox(i);
     square.classList.add("box-49");
-		container.append(square);
+    mSquare.classList.add("box-49");
+    
+    mLayer.append(mSquare);
+    container.append(square);
+    const inclusion = bombs.includes(i);
 
-    square.addEventListener("click", function(){
-      bombFinder(square);
-    })
+    if(inclusion){
+      square.classList.add("box-bomb");
+    }
+
+    function listenAdd(){
+      mSquare.addEventListener("click", function(){
+        bombFinder(mSquare);
+      })
+    }
+    
+    mSquare.removeEventListener("click", listenAdd())
   }
 }
 
@@ -137,6 +174,7 @@ function bombFinder(variable){
     endgameResult.classList.remove("d-none");
     endgameResult.innerHTML = `Hai fatto ${counter} punti!`
     tLayer.classList.remove("d-none");
+    mLayer.classList.add("d-none");
     numeroTrovato = false;
   }else{
     console.log("non bomba");
@@ -165,3 +203,5 @@ function doppio(){
 
   console.log(blackList);
 }
+
+
