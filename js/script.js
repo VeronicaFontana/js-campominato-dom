@@ -5,6 +5,8 @@ const select = document.querySelector(".form-select");
 const endgameResult =  document.getElementById("endgame");
 const mLayer = document.querySelector(".m-layer");
 const tLayer = document.querySelector(".t-layer");
+const win = document.getElementById("win");
+const lose = document.getElementById("lose");
 
 
 endgameResult.classList.add("d-none");
@@ -27,7 +29,10 @@ btnRestart.addEventListener("click", function(){
   select.value = 0;
   bombs = [];
   endgameResult.classList.add("d-none");
+  mLayer.classList.add("d-none");
   tLayer.classList.add("d-none");
+  win.classList.add("d-none");
+  lose.classList.add("d-none");
   counter = 0;
 })
 
@@ -172,7 +177,8 @@ function bombFinder(variable){
   if(numeroTrovato){
     console.log("bomba");
     endgameResult.classList.remove("d-none");
-    endgameResult.innerHTML = `Hai fatto ${counter} punti!`
+    endgameResult.innerHTML = `Hai fatto ${counter} punti!`;
+    lose.classList.remove("d-none");
     tLayer.classList.remove("d-none");
     mLayer.classList.add("d-none");
     numeroTrovato = false;
